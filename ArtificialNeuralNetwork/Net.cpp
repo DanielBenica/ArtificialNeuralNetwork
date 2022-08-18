@@ -21,6 +21,7 @@ Net::Net(const std::vector<unsigned> &topology)
 			m_layers.back().push_back(Neuron(numOutput,neuronNum));
 			std::cout << "Neuron created!!" << std::endl;
 		}
+		m_layers.back().back().setOutputVal(1.0);
 	}
 }
 
@@ -91,4 +92,15 @@ void Net::backProp(const std::vector<double>& targetVals)
 		}
 	}
 
+}
+
+void Net::getResults(std::vector<double>& resultVals) const 
+{
+	resultVals.clear();
+	
+	for (int n = 0; n < m_layers.back().size(); n++)
+	{
+		Neuron ne = m_layers.back()[n];
+		resultVals.push_back(ne.getOutputVal());
+	}
 }
